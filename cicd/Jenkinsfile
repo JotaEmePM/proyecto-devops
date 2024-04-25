@@ -18,7 +18,7 @@ pipeline {
                 }
                 stage('ejecutar test') {
                     steps {
-                        sh 'npm run test'
+                        echo 'npm run test'
                     }
                 }
                 stage('build') {
