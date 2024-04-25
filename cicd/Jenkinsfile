@@ -5,26 +5,24 @@ pipeline {
             agent {
                 docker { image 'node:20.11.1-alpine3.19' }
             }
-            stages {
-                stage('Iniciar proceso pipeline') {
-                    steps {
-                        step {
-                            echo "Iniciar proceso pipeline"
-                        }
-                        steps {
-                            checkout scm
-                        }
-                    }
+            steps {
+                step {
+                    echo "Iniciar proceso pipeline"
                 }
-                stage('Acciones NODE') {
-                    steps {
-                        sh 'npm install'
-                    }
-                    steps {
-                        sh 'npm run build'
-                    }
+                steps {
+                    checkout scm
+                }
+                steps {
+                    sh 'npm install'
+                }
+                steps {
+                    sh 'npm run build'
                 }
             }
+                
+                    
+                
+            
         }
     }
 }
