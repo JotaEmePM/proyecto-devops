@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    image: localhost:8082/app:latest
+    container_name: app_nexus
+    restar: unless-stopped
+    env_file: .env
+    environment:
+      - AMBIENTE="DEV"
+      - API_KEY='./secrets.txt'
+    ports: 3001:3001
+    secrets:
+      - secrets_app
+secrets:
+  secrets_app:
+    file: ./secrets.txt
