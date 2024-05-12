@@ -4,7 +4,6 @@ pipeline {
         stage('node pipeline') {
             agent {
                 docker { image 'node:20.11.1-alpine3.19' }
-                reuseNode true
             }
             stages {
                 stage("checkout git") {
@@ -29,13 +28,5 @@ pipeline {
                 }
             }
         }
-        // stage('docker') {
-        //     steps {
-        //         sh 'docker build -t localhost:8082/app_ts .'
-        //         sh "docker tag localhost:8082/app_ts localhost:8082/app-ts:${env.BUILD_NUMBER}"
-        //         sh 'docker push localhost:8082/app_ts'
-        //         sh "docker push localhost:8082/app_ts:${env.BUILD_NUMBER}"
-        //     }
-        // }
     }    
 }
