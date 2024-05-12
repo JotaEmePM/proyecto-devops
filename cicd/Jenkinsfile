@@ -2,30 +2,29 @@ pipeline {
     agent any
     stages {
         stage('node pipeline') {
-            steps {
-                script {
-                    docker.image('node:20.11.1-alpine3.19').inside {
-                        // Resto de tus pasos dentro de la etapa 'node pipeline'
-                        stage("checkout git") {
-                            steps {
-                                checkout scm
-                            }
-                        }
-                        stage('instalar dep') {
-                            steps {
-                                sh 'npm install'
-                            }
-                        }
-                        stage('ejecutar test') {
-                            steps {
-                                sh 'npm run test'
-                            }
-                        }
-                        stage('build') {
-                            steps {
-                                sh 'npm run build'
-                            }
-                        }
+            agent {
+                docker { image 'node:20.11.1-alpine3.19' }
+                reuseNode true
+            }
+            stages {
+                stage("checkout git") {
+                    steps {
+                        checkout scm
+                    }
+                }
+                stage('instalar dep') {
+                    steps {
+                        sh 'npm install'
+                    }
+                }
+                stage('ejecutar test') {
+                    steps {
+                        sh 'npm run test'
+                    }
+                }
+                stage('build') {
+                    steps {
+                        sh 'npm run build'
                     }
                 }
             }
